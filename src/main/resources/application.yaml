@@ -1,0 +1,11 @@
+spring:
+  application:
+    name:
+      api-user-v1
+  webflux:
+    base-path: /api/user-v1
+springdoc:
+  api-docs:
+    path: /openapi
+  swagger-ui:
+    path: /swagger-ui.html

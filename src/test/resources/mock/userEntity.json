@@ -1,0 +1,10 @@
+{
+	"userId": 1,
+	"name": "Juan Rodriguez",
+	"email": "juan01@rodriguez.org",
+	"password": "$2a$10$izrnPgn6D5Vfx4ZgAkOsD.iT6Drr2WN5AQ2/jKEl7iat5f./D5eQW",
+	"active": true,
+	"created": "2024-12-27T23:23:55.1028887",
+	"modified": "2024-12-27T23:23:55.1028887",
+	"lastLogin": "2024-12-27T23:23:55.1028887"
+}

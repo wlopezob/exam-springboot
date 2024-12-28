@@ -1,0 +1,26 @@
+server:
+  port: 8082
+spring:
+  r2dbc:
+    url: r2dbc:h2:mem:///db
+    username: sa
+    password:
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+  devtools:
+    livereload:
+      enabled: true
+      port: 35730
+  redis:
+    host: localhost
+    port: 6379
+security:
+  jwt:
+    secret: 5b87002b7468120df2e1dbbd223caf54e9cfbf0800f084380bc1d1d84f747bb897a9bfae51b868a0cf2d0f5094c0e07a07f6a49f2fdb395c37e7186cab6d00f0
+    expiration: 86400000
+    rol: ADMIN
+validation:
+  password:
+    pattern: ^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$ # Minimo 8 caracteres, al menos una letra y un número, solo letras y números
