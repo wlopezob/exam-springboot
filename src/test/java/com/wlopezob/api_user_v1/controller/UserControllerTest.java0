@@ -1,0 +1,66 @@
+package com.wlopezob.api_user_v1.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
+import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
+import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithAnonymousUser;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
+import javax.swing.Spring;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.reactive.server.WebTestClient;
+
+import com.wlopezob.api_user_v1.config.SecurityConfig;
+import com.wlopezob.api_user_v1.model.dto.PhoneRequest;
+import com.wlopezob.api_user_v1.model.dto.UserRequest;
+import com.wlopezob.api_user_v1.model.dto.UserResponse;
+import com.wlopezob.api_user_v1.service.UserService;
+import com.wlopezob.api_user_v1.util.TestUtil;
+
+import reactor.core.publisher.Mono;
+
+// @ExtendWith(SpringExtension.class)
+// @WebFluxTest(controllers = UserController.class)
+// @Import(SecurityConfig.class)
+// @AutoConfigureWebTestClient
+//@SpringBootTest(classes = SecurityConfig.class)
+@SpringBootTest
+@AutoConfigureWebTestClient
+public class UserControllerTest {
+  @Autowired
+  private WebTestClient webTestClient;
+
+  @MockitoBean
+  private UserService userService;
+
+  @Test
+  void whenValidRequest_thenReturns201() {
+    UserRequest userRequest = TestUtil.loadJsonFromResource("mock/userRequest.json",
+        UserRequest.class);
+    UserResponse userResponse = TestUtil.loadJsonFromResource("mock/userResponse.json",
+        UserResponse.class);
+
+    when(userService.save(any(UserRequest.class)))
+      .thenReturn(Mono.just(userResponse));
+
+    webTestClient.post()
+        .uri("/user")
+        .contentType(MediaType.APPLICATION_JSON)
+        .bodyValue(userRequest)
+        .exchange()
+        .expectStatus().isCreated();
+    Mockito.verify(userService, Mockito.times(1)).save(any(UserRequest.class));
+  }
+}
