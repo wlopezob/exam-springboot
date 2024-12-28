@@ -10,8 +10,14 @@ import java.time.format.DateTimeFormatter;
 
 public class Util {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    private static final ObjectMapper objectMapper = new ObjectMapper();
 
+    /**
+     * Formats a LocalDateTime object to a string using a predefined formatter.
+     * If the input date is null, returns null.
+     *
+     * @param date the LocalDateTime to be formatted
+     * @return the formatted date string, or null if input is null
+     */
     public static String formatDate(LocalDateTime date) {
         if (date == null) {
             return null;
@@ -19,13 +25,13 @@ public class Util {
         return date.format(formatter);
     }
 
+    /**
+     * Generates a Redis key by concatenating a prefix constant with the provided key.
+     *
+     * @param key The key string to be concatenated with the Redis prefix
+     * @return A string representing the complete Redis key with prefix
+     */
     public static final String getKeyRedis(String key) {
         return Constans.KEY_REDIS.concat("_").concat(key);
-    }
-
-    @SneakyThrows
-    public static <T> String toJson(T object) {
-        objectMapper.registerModule(new JavaTimeModule());
-        return objectMapper.writeValueAsString(object);
     }
 }

@@ -1,10 +1,6 @@
 server:
   port: 8082
 spring:
-  r2dbc:
-    url: r2dbc:h2:mem:///db
-    username: sa
-    password:
   sql:
     init:
       mode: always

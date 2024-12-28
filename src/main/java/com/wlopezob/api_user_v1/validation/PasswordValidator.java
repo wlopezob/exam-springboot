@@ -19,6 +19,13 @@ public class PasswordValidator implements ConstraintValidator<PasswordAnnotation
         pattern = Pattern.compile(validationConfig.getPassword().getPattern());
     }
 
+    /**
+     * Validates if the given password meets the required pattern criteria.
+     * 
+     * @param value The password string to validate
+     * @param context The constraint validator context
+     * @return true if the password matches the pattern, false if the password is null or doesn't match
+     */
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if (value == null) {

@@ -45,7 +45,7 @@ public class CustomControllerAdvice {
     });
     DataApiException dataApiException = DataApiException.builder()
         .mensaje(String.join(", ", errors))
-        .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
+        .httpStatus(HttpStatus.BAD_REQUEST.value())
         .build();
     return Mono.just(ResponseEntity.badRequest().body(dataApiException));
   }
