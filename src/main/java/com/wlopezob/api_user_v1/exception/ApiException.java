@@ -12,7 +12,7 @@ public class ApiException extends RuntimeException {
   private int httpStatus;
   private Throwable cause;
 
-  ApiException(String mensaje, int httpStatus,
+  public ApiException(String mensaje, int httpStatus,
       Throwable cause) {
     super(mensaje, cause);
     this.mensaje = mensaje;

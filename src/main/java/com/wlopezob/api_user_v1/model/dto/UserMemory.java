@@ -1,6 +1,6 @@
 package com.wlopezob.api_user_v1.model.dto;
 
-import com.wlopezob.api_user_v1.model.entity.UserEntity;
+import com.wlopezob.api_user_v1.thirdparty.api_data_v1.model.UserDataResponse;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,6 +14,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class UserMemory {
-  private UserEntity userEntity;
+  private UserDataResponse userDataResponse;
   private UserResponse userResponse;
 }

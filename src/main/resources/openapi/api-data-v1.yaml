@@ -1,0 +1,144 @@
+openapi: 3.0.1
+info:
+  title: api-data-v1
+  description: Api managment user
+  version: 0.0.1-SNAPSHOT
+servers:
+  - url: http://localhost:8081/
+  - url: http://localhost/
+paths:
+  /user:
+    post:
+      tags:
+        - user-controller
+      summary: Create a new user
+      description: Creates a new user with the provided information including name, email, and phone numbers
+      operationId: save
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDataRequest'
+        required: true
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDataResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataApiException'
+        '409':
+          description: Error validation email
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataApiException'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataApiException'
+components:
+  schemas:
+    UserDataResponse:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The user id
+          example: 9075f560-7afb-4320-bc7a-5670a46fb51e
+        name:
+          type: string
+          description: The user name
+          example: Juan Rodriguez
+        email:
+          type: string
+          description: The user email
+          example: juan01@rodriguez.org
+        active:
+          type: boolean
+          description: The user active status
+          example: true
+        created:
+          type: string
+          description: The user created date
+          example: 27-12-2024
+        modified:
+          type: string
+          description: The user modified date
+          example: 27-12-2024
+        token:
+          type: string
+          description: The user token
+          example: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuMDFAcm9kcmlndWV6Lm9yZyIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJBRE1JTiJ9XSwiaWF0IjoxNzM1MzU2NTI0LCJleHAiOjE3MzU0NDI5MjR9.Slq7hUJYKv547jZ1ZELEPDOUlyKKu-hPsID6sR3h0VaILSUmvR49YcQJ4v4ZDNEDnvW6sqTqJ9fdXfgICqDazA
+        last_login:
+          type: string
+          description: The user last login date
+          example: 27-12-2024
+    DataApiException:
+      type: object
+      properties:
+        mensaje:
+          type: string
+    PhoneRequest:
+      minLength: 1
+      required:
+        - cityCode
+        - countryCode
+        - number
+      type: object
+      properties:
+        number:
+          type: string
+          description: The phone number
+          example: '1234567'
+        cityCode:
+          type: string
+          description: The city code
+          example: '1'
+        countryCode:
+          type: string
+          description: The country code
+          example: '57'
+      description: The user phones
+    UserDataRequest:
+      required:
+        - email
+        - name
+        - password
+        - phones
+        - token
+      type: object
+      properties:
+        name:
+          type: string
+          description: The user name
+          example: Juan Rodriguez
+        email:
+          pattern: ^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$
+          type: string
+          description: The user email
+          example: juan01@rodriguez.org
+        password:
+          type: string
+          description: The user password
+          example: hunter211$
+        phones:
+          minLength: 1
+          maxItems: 2147483647
+          minItems: 1
+          type: array
+          description: The user phones
+          items:
+            $ref: '#/components/schemas/PhoneRequest'
+        token:
+          type: string
+          description: The user token
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ikp1YW4gUm9kcmlndWV6IiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c

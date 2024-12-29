@@ -1,0 +1,10 @@
+{
+	"userId": "1",
+	"name": "Juan Rodriguez",
+	"email": "juan01@rodriguez.org",
+	"active": true,
+	"created": "29-12-2024",
+	"modified": "29-12-2024",
+	"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuMDFAcm9kcmlndWV6Lm9yZyIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJBRE1JTiJ9XSwiaWF0IjoxNzM1NTEwODgzLCJleHAiOjE3MzU1OTcyODN9.0G8DWguKesnJozptF75kzLDloMCROLh-RsSVY1_TZtI6YRU7DoEPwHY0psHSwgHzRtDF7Q3WUt9QugSiVOe4dw",
+	"last_login": "29-12-2024"
+}

@@ -1,12 +1,12 @@
 package com.wlopezob.api_user_v1.util;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import lombok.SneakyThrows;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Util {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -33,5 +33,12 @@ public class Util {
      */
     public static final String getKeyRedis(String key) {
         return Constans.KEY_REDIS.concat("_").concat(key);
+    }
+
+    @SneakyThrows
+    public static <T> String toJson(T obj) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        return objectMapper.writeValueAsString(obj);
     }
 }
