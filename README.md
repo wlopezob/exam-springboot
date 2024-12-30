@@ -185,7 +185,7 @@ services:
       - SECURITY_JWT_SECRET=5b87002b7468120df2e1dbbd223caf54e9cfbf0800f084380bc1d1d84f747bb897a9bfae51b868a0cf2d0f5094c0e07a07f6a49f2fdb395c37e7186cab6d00f0
       - SECURITY_JWT_EXPIRATION=86400000
       - SECURITY_JWT_ROL=ADMIN
-      - VALIDATION_PASSWORD_PATTERN=^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$ # Minimo 8 caracteres, al menos una letra, un número y un carácter especial
+      - VALIDATION_PASSWORD_PATTERN=^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$
       - HTTP_CLIENT_BASE_URL_DATA_API=http://apidatav1/api/data-v1
 
   apidatav1:
