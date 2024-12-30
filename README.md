@@ -236,8 +236,11 @@ curl --location 'http://localhost:8082/api/user-v1/user' \
 }'
 ```
 
-### 📚 Documentation
-#### Download OpenAPI documentation:
+## 📚 Documentation
+### Download OpenAPI documentation:
 ```
 http://localhost:8082/api/user-v1/openapi
 ```
+
+# 🎥 Videos
+For more videos and tutorials, visit: https://www.youtube.com/@wlopezob
