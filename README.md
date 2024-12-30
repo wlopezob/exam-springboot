@@ -29,15 +29,15 @@ This project consists of two main microservices:
 
 
 ## 📊 Diagram sequence
-### 01. Diagram Sequence flow validation and error
+### 01. Diagram Sequence  validation flow and error
 
 
-[![](diagram/sequence-error.png)
+![](diagram/sequence-error.png)
 
 ### 02. Diagram Sequence
 
 
-[![](diagram/sequence.png)
+![](diagram/sequence.png)
 
 
 ## 🛠 Technologies
