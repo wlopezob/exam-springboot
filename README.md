@@ -1,6 +1,44 @@
 # API User Management
 
-A reactive REST API for register user built with Spring WebFlux, featuring Redis storage and JWT authentication.
+A microservices-based user management system built with Spring WebFlux, featuring Redis caching and JWT authentication.
+
+## 📋 Project Overview
+
+This project consists of two main microservices:
+
+### API User Service (api-user-v1)
+- **Description**: Handles user authentication and session management
+- **Key Features**:
+  - User registration validation
+  - Password generation (Bcrypt) and pattern verification
+  - JWT token generation
+  - Redis session caching
+  - Security middleware
+
+### API Data Service (api-data-v1)
+- **Description**: Manages user data persistence and retrieval in H2 database
+- **Key Features**:
+  - User data storage 
+  - Phone number management
+  - Token storage
+  - Email validation
+  - Reactive database operations
+
+## 🏗 Architecture
+![](diagram/architecture.png)
+
+
+## 📊 Diagram sequence
+### 01. Diagram Sequence flow validation and error
+
+
+[![](diagram/sequence-error.png)
+
+### 02. Diagram Sequence
+
+
+[![](diagram/sequence.png)
+
 
 ## 🛠 Technologies
 
@@ -96,7 +134,7 @@ spring:
 ```
 
 ## ⚙️Environment Variables
-#### Variables:
+### Variables:
 ```
 SERVER_PORT: 80
 SPRING_DATA_REDIS_HOST: redis-server
@@ -105,7 +143,7 @@ SECURITY_JWT_SECRET: 5b87002b7468120df2e1dbbd223caf54e9cfbf0800f084380bc1d1d84f7
 SECURITY_JWT_EXPIRATION: 86400000
 SECURITY_JWT_ROL: ADMIN
 ```
-#### Definition:
+### Definition:
 
 | Variable | Description | Value Required |
 |----------|-------------|---------------|
@@ -115,10 +153,10 @@ SECURITY_JWT_ROL: ADMIN
 | `SECURITY_JWT_SECRET` | Secret key used for JWT token generation and validation. Should be at least 256 bits long | Generate using `openssl rand -hex 64` |
 | `SECURITY_JWT_EXPIRATION` | JWT token expiration time in milliseconds (24 hours = 86400000) | `86400000` |
 | `SECURITY_JWT_ROL` | Default role assigned to new users | `ADMIN` |
+| `VALIDATION_PASSWORD_PATTERN` |Pattern validation of password, example: Minimum 8 characters, at least one letter, a number and a special character| `^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$` |
+| `HTTP_CLIENT_BASE_URL_DATA_API` | Base url of Data Api | `http://apidatav1/api/data-v1` |
 
-<b>The environment variables are declared in the file docker-compose.yml</b>
-
-#### docker-compose.yml
+### docker-compose.yml
 ```yaml
 version: '3.8'
 services:
@@ -132,9 +170,10 @@ services:
     command: redis-server --appendonly yes
 
 
+
   apiuserv1:
     container_name: apiuserv1
-    build: .
+    build: ./api-user-v1
     ports:
       - "8082:80"
     depends_on:
@@ -147,12 +186,23 @@ services:
       - SECURITY_JWT_EXPIRATION=86400000
       - SECURITY_JWT_ROL=ADMIN
       - VALIDATION_PASSWORD_PATTERN=^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$ # Minimo 8 caracteres, al menos una letra, un número y un carácter especial
+      - HTTP_CLIENT_BASE_URL_DATA_API=http://apidatav1/api/data-v1
+
+  apidatav1:
+    container_name: apidatav1
+    build: ./api-data-v1
+    environment:
+      - SERVER_PORT=80
+
 volumes:
   redis_data:
 
+
+
+
 ```
 
-### 🚀 Running with Docker Compose
+## 🚀 Running with Docker Compose
 
 ```bash
 # Start services
@@ -161,7 +211,7 @@ docker-compose up -d
 # Verify running containers
 docker-compose ps
 ```
-### 🛑 Stopping Services
+## 🛑 Stopping Services
 ```bash
 # Stop services
 docker-compose down
@@ -191,11 +241,3 @@ curl --location 'http://localhost:8082/api/user-v1/user' \
 ```
 http://localhost:8082/api/user-v1/openapi
 ```
-
-#### Diagram Sequence
-
-[![](diagram/sequence.svg)
-
-#### Diagram class
-
-[![](diagram/class.svg)

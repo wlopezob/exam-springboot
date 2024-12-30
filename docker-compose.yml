@@ -10,9 +10,10 @@ services:
     command: redis-server --appendonly yes
 
 
+
   apiuserv1:
     container_name: apiuserv1
-    build: .
+    build: ./api-user-v1
     ports:
       - "8082:80"
     depends_on:
@@ -25,6 +26,14 @@ services:
       - SECURITY_JWT_EXPIRATION=86400000
       - SECURITY_JWT_ROL=ADMIN
       - VALIDATION_PASSWORD_PATTERN=^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$ # Minimo 8 caracteres, al menos una letra, un número y un carácter especial
+      - HTTP_CLIENT_BASE_URL_DATA_API=http://apidatav1/api/data-v1
+
+  apidatav1:
+    container_name: apidatav1
+    build: ./api-data-v1
+    environment:
+      - SERVER_PORT=80
+
 volumes:
   redis_data:
 

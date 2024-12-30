@@ -1,0 +1,11 @@
+server:
+  port: 8081
+spring:
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+  devtools:
+    livereload:
+      enabled: true
+      port: 35731

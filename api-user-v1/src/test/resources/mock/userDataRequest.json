@@ -1,0 +1,13 @@
+{
+	"name": "Juan Rodriguez",
+	"email": "juan01@rodriguez.org",
+	"password": "$2a$10$r.ayKnoC6n4HXWBtt5w4mu35ANPT1ZyZGDvYJ9BxPM6I3wWleW9Oi",
+	"phones": [
+		{
+			"number": "1234567",
+			"cityCode": "1",
+			"countryCode": "57"
+		}
+	],
+	"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqdWFuMDFAcm9kcmlndWV6Lm9yZyIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJBRE1JTiJ9XSwiaWF0IjoxNzM1NTEwODgzLCJleHAiOjE3MzU1OTcyODN9.0G8DWguKesnJozptF75kzLDloMCROLh-RsSVY1_TZtI6YRU7DoEPwHY0psHSwgHzRtDF7Q3WUt9QugSiVOe4dw"
+}
